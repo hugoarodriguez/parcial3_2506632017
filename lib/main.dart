@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart' as firebase_core;
 
 //Pantallas
+import 'package:parcial3_2506632017/screens/home_screen.dart';
 import 'package:parcial3_2506632017/screens/usuario_screen.dart';
+import 'package:parcial3_2506632017/screens/usuarios_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,9 +23,11 @@ class Parcial3 extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       title: 'Parcial 3',
-      initialRoute: 'usuario',
+      initialRoute: 'home_screen',
       routes: {
+        'home_screen' : (BuildContext context) => HomeScreen(),
         'usuario' : (BuildContext context) => UsuarioScreen(),
+        'usuarios' : (BuildContext context) => UsuariosScreen(),
       },
     );
   }

@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart' as cloud_firestore;
+import 'package:parcial3_2506632017/models/usuario_model.dart';
 
 class UsuariosProvider {
   final cloud_firestore.FirebaseFirestore _firestore = cloud_firestore.FirebaseFirestore.instance;
@@ -30,5 +33,21 @@ class UsuariosProvider {
       return false;
 
     }
+  }
+
+  Future<List<UsuarioModel>> getUsuarios() async {
+    List<UsuarioModel> usuariosList = [];
+
+    //Referencia a la colección 'usuarios'
+    cloud_firestore.CollectionReference usuarios  = _firestore.collection('usuarios');
+
+    final cloud_firestore.QuerySnapshot result = await usuarios.get();
+    final List<cloud_firestore.DocumentSnapshot> documents = result.docs;
+    
+    for (var doc in documents) { 
+      usuariosList.add(UsuarioModel(doc['avatar'], doc['correo'], doc['nivel'], doc['nombre'], doc['password'], doc['tipo'], doc['usuario']));
+    }
+
+    return usuariosList;
   }
 }
