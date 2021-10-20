@@ -59,6 +59,52 @@ class _LoginFormState extends State<_LoginForm> {
 
             SizedBox( height: 30 ),
 
+            //Nombre
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10.0),
+              child: TextFormField(
+                autocorrect: false,
+                keyboardType: TextInputType.name,
+                decoration: InputDecoration(
+                  hintText: 'Juan Pérez',
+                  labelText: 'Nombre',
+                  prefixIcon: Icon(Icons.text_fields_rounded)
+                ),
+                validator: ( value ) {
+
+                    return (value != '')
+                      ? null
+                      : 'Debes ingresar el nombre';
+
+                },
+              ),
+            ),
+
+            SizedBox( height: 30 ),
+
+            //Avatar
+             Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10.0),
+              child: TextFormField(
+                autocorrect: false,
+                keyboardType: TextInputType.name,
+                decoration: InputDecoration(
+                  hintText: 'jperez8',
+                  labelText: 'Avatar',
+                  prefixIcon: Icon(Icons.text_fields_rounded)
+                ),
+                validator: ( value ) {
+
+                    return (value != '')
+                      ? null
+                      : 'Debes ingresar el avatar';
+
+                },
+              ),
+            ),
+
+            SizedBox( height: 30 ),
+
             //Usuario
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 15.0),
@@ -195,7 +241,6 @@ class _LoginFormState extends State<_LoginForm> {
             ),
 
             SizedBox( height: 30 ),
-
 
             //Botón
             MaterialButton(
