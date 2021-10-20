@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class UsuarioScreen extends StatelessWidget {
+  const UsuarioScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class LoginScreen extends StatelessWidget {
       
                 Text('Usuarios', style: TextStyle(color: Colors.white, fontSize: 45.0) ),
                 SizedBox( height: 30.0 ),
-                _LoginForm(),
+                _UsuarioForm(),
                 SizedBox( height: 30.0 ),
 
               ],
@@ -30,13 +30,13 @@ class LoginScreen extends StatelessWidget {
   }
 }
 
-class _LoginForm extends StatefulWidget {
+class _UsuarioForm extends StatefulWidget {
 
   @override
-  State<_LoginForm> createState() => _LoginFormState();
+  State<_UsuarioForm> createState() => _UsuarioFormState();
 }
 
-class _LoginFormState extends State<_LoginForm> {
+class _UsuarioFormState extends State<_UsuarioForm> {
   
   final _formKey = GlobalKey<FormState>();
 

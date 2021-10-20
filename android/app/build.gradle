@@ -50,6 +50,10 @@ android {
         targetSdkVersion 30
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        
+        // Habilitando multidex
+        multiDexEnabled true
+
     }
 
     buildTypes {
