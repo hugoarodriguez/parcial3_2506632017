@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "691478609009",
+    "project_id": "parcial3-harc",
+    "storage_bucket": "parcial3-harc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:691478609009:android:7bef83a89463f94ac56fd0",
+        "android_client_info": {
+          "package_name": "com.example.parcial3_2506632017"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "691478609009-2kmm3ju591ho9ohv84di7g43o0qpfiq5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcdPTrBC23N1qOP6O8i12u9u0enfMk-MY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "691478609009-2kmm3ju591ho9ohv84di7g43o0qpfiq5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
