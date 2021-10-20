@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
+import 'package:parcial3_2506632017/providers/usuarios_provider.dart';
 
 class UsuarioScreen extends StatelessWidget {
   const UsuarioScreen({Key? key}) : super(key: key);
@@ -40,9 +41,20 @@ class _UsuarioFormState extends State<_UsuarioForm> {
   
   final _formKey = GlobalKey<FormState>();
 
+  //Controladores
+  final TextEditingController _nombre = TextEditingController();
+  final TextEditingController _avatar = TextEditingController();
+  final TextEditingController _correo = TextEditingController();
+  final TextEditingController _usuario = TextEditingController();
+  final TextEditingController _password = TextEditingController();
+  int _nivel = 0;
+  String _tipo = '';
+
 
   @override
   Widget build(BuildContext context) {
+
+    UsuariosProvider usuariosProvider = UsuariosProvider();
 
     String valorDropDownNivel = 'Seleccionar nivel';
     String valorDropDownTipo = 'Seleccionar tipo';
@@ -63,6 +75,7 @@ class _UsuarioFormState extends State<_UsuarioForm> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 10.0),
               child: TextFormField(
+                controller: _nombre,
                 autocorrect: false,
                 keyboardType: TextInputType.name,
                 decoration: InputDecoration(
@@ -86,6 +99,7 @@ class _UsuarioFormState extends State<_UsuarioForm> {
              Padding(
               padding: EdgeInsets.symmetric(horizontal: 10.0),
               child: TextFormField(
+                controller: _avatar,
                 autocorrect: false,
                 keyboardType: TextInputType.name,
                 decoration: InputDecoration(
@@ -109,6 +123,7 @@ class _UsuarioFormState extends State<_UsuarioForm> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 15.0),
               child: TextFormField(
+                controller: _usuario,
                 autocorrect: false,
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
@@ -132,6 +147,7 @@ class _UsuarioFormState extends State<_UsuarioForm> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 10.0),
               child: TextFormField(
+                controller: _correo,
                 autocorrect: false,
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
@@ -158,6 +174,7 @@ class _UsuarioFormState extends State<_UsuarioForm> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 10.0),
               child: TextFormField(
+                controller: _password,
                 autocorrect: false,
                 obscureText: true,
                 keyboardType: TextInputType.emailAddress,
@@ -182,6 +199,7 @@ class _UsuarioFormState extends State<_UsuarioForm> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 10.0),
               child: DropdownButtonFormField(
+                
                 value: valorDropDownNivel,
                 icon: Icon(Icons.arrow_drop_down_circle_rounded),
                 iconSize: 24,
@@ -199,6 +217,11 @@ class _UsuarioFormState extends State<_UsuarioForm> {
                   );
                 }).toList(),
                 validator: (value){
+
+                  if(int.tryParse(value.toString()) != null){
+                    _nivel = int.parse(value.toString());
+                  }
+                  
 
                   return (value != 'Seleccionar nivel')
                       ? null
@@ -232,6 +255,8 @@ class _UsuarioFormState extends State<_UsuarioForm> {
                 }).toList(),
                 validator: (value){
 
+                  _tipo = value.toString();
+
                   return (value != 'Seleccionar tipo')
                       ? null
                       : 'Debes seleccionar un tipo';
@@ -253,11 +278,24 @@ class _UsuarioFormState extends State<_UsuarioForm> {
                 child: Text('Ingresar',style: TextStyle( color: Colors.white ),
                 )
               ),
-              onPressed: (){
+              onPressed: () async {
+                
                 if(_formKey.currentState!.validate()){
-                  print('Valido');
-                } else {
-                  print('Invalido');
+                  bool r = await usuariosProvider.aggUsuario(_avatar.text, _correo.text, _nivel, _nombre.text, _password.text, 
+                  _tipo, _usuario.text);
+
+                  if(r){
+                    //Si se guardó el usuario
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Guardando usuario'))
+                    );
+                  } else {
+                    //Si no se guardó el usuario
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('No se pudo guardar el usuario'))
+                      );
+                  }
+
                 }
               }
             ),
