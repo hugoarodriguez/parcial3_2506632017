@@ -30,7 +30,7 @@ class HomeScreen extends StatelessWidget {
               SizedBox(height: 30,),
               _crearBoton(context, 'Configuracion', 'usuario'),
               SizedBox(height: 30,),
-              _crearBoton(context, 'Mensajes', 'usuario'),
+              _crearBoton(context, 'Mensajes', 'mensajes'),
               SizedBox(height: 30,),
               _crearBoton(context, 'Grupos', 'usuario'),
               SizedBox(height: 30,),

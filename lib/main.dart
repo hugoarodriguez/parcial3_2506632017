@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart' as firebase_core;
 
 //Pantallas
 import 'package:parcial3_2506632017/screens/home_screen.dart';
+import 'package:parcial3_2506632017/screens/mensajes_screen.dart';
 import 'package:parcial3_2506632017/screens/usuario_edit_screen.dart';
 import 'package:parcial3_2506632017/screens/usuario_screen.dart';
 import 'package:parcial3_2506632017/screens/usuarios_screen.dart';
@@ -30,6 +31,7 @@ class Parcial3 extends StatelessWidget {
         'usuario_add' : (BuildContext context) => UsuarioScreen(),
         'usuario_edit' : (BuildContext context) => UsuarioEditScreen(),
         'usuarios' : (BuildContext context) => UsuariosScreen(),
+        'mensajes' : (BuildContext context) => MensajesScreen(),
       },
     );
   }
