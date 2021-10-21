@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names, prefer_initializing_formals
 
 class UsuarioModel{
+  String id = '';
   String avatar = '';
   String correo = ''; 
   int nivel = 0;
@@ -9,7 +10,8 @@ class UsuarioModel{
   String tipo = '';
   String usuario = '';
 
-  UsuarioModel(String avatar, String correo, int nivel, String nombre, String password, String tipo, String usuario){
+  UsuarioModel(String id, String avatar, String correo, int nivel, String nombre, String password, String tipo, String usuario){
+    this.id = id;
     this.avatar = avatar;
     this.correo = correo;
     this.nivel = nivel;

@@ -6,6 +6,7 @@ import 'package:parcial3_2506632017/models/usuario_model.dart';
 class UsuariosProvider {
   final cloud_firestore.FirebaseFirestore _firestore = cloud_firestore.FirebaseFirestore.instance;
 
+  //Agregar usuario
   Future<bool> aggUsuario(String avatar, String correo, int nivel, String nombre, String password, String tipo, String usuario) async {
     bool r = false;
 
@@ -35,6 +36,7 @@ class UsuariosProvider {
     }
   }
 
+  //Obtener todos los usuarios
   Future<List<UsuarioModel>> getUsuarios() async {
     List<UsuarioModel> usuariosList = [];
 
@@ -45,8 +47,22 @@ class UsuariosProvider {
     final List<cloud_firestore.DocumentSnapshot> documents = result.docs;
     
     for (var doc in documents) { 
-      usuariosList.add(UsuarioModel(doc['avatar'], doc['correo'], doc['nivel'], doc['nombre'], doc['password'], doc['tipo'], doc['usuario']));
+      usuariosList.add(UsuarioModel(doc.reference.id, doc['avatar'], doc['correo'], doc['nivel'], doc['nombre'], doc['password'], doc['tipo'], doc['usuario']));
     }
+
+    return usuariosList;
+  }
+
+  //Obtener un solo usuario
+  Future<List<UsuarioModel>> getUsuario(String idUsuario) async {
+    List<UsuarioModel> usuariosList = [];
+
+    //Referencia a la colección 'usuarios'
+    cloud_firestore.CollectionReference usuarios  = _firestore.collection('usuarios');
+
+    final cloud_firestore.DocumentSnapshot doc = await usuarios.doc(idUsuario).get();
+    
+    usuariosList.add(UsuarioModel(doc.reference.id, doc['avatar'], doc['correo'], doc['nivel'], doc['nombre'], doc['password'], doc['tipo'], doc['usuario']));
 
     return usuariosList;
   }

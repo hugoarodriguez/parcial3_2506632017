@@ -12,7 +12,7 @@ class UsuariosScreen extends StatelessWidget {
     UsuariosProvider usuariosProvider = UsuariosProvider();
 
     return Container(
-      color: Colors.deepPurpleAccent.shade700,
+      color: Colors.deepOrange.shade700,
           child: FutureBuilder(
             future: usuariosProvider.getUsuarios(),
             builder: (context, snapshot){
@@ -34,6 +34,7 @@ class UsuariosScreen extends StatelessWidget {
 
   Widget _crearListViewDatos(BuildContext context, data){
     List items = data;
+
     return ListView.builder(
       itemCount: items.length,
       itemBuilder: (context, i) => Padding(
@@ -42,7 +43,7 @@ class UsuariosScreen extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
           width: double.infinity,
           decoration: BoxDecoration(
-            color: Colors.deepPurpleAccent.shade200,
+            color: Colors.deepOrange.shade200,
             borderRadius: BorderRadius.circular(10.0),
             boxShadow: <BoxShadow>[
               BoxShadow(
@@ -65,7 +66,9 @@ class UsuariosScreen extends StatelessWidget {
               ],
             ),
             onPressed: (){
-              print('Holhgfghf');
+
+              Navigator.pushNamed(context, 'usuario_edit', arguments: items[i].id);
+
             },
             onLongPress: (){
               print('Presionado 2');
