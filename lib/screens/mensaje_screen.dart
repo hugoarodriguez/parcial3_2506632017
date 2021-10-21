@@ -17,7 +17,7 @@ class MensajeScreen extends StatelessWidget {
               children: [
                 SizedBox(height: 50.0,),
       
-                Text('Usuarios', style: TextStyle(color: Colors.white, fontSize: 45.0) ),
+                Text('Mensajes', style: TextStyle(color: Colors.white, fontSize: 45.0) ),
                 SizedBox( height: 30.0 ),
                 _MensajeForm(),
                 SizedBox( height: 30.0 ),
