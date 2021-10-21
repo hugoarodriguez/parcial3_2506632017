@@ -5,6 +5,9 @@ import 'package:firebase_core/firebase_core.dart' as firebase_core;
 import 'package:parcial3_2506632017/screens/calendario_edit_screen.dart';
 import 'package:parcial3_2506632017/screens/calendario_screen.dart';
 import 'package:parcial3_2506632017/screens/calendarios_screen.dart';
+import 'package:parcial3_2506632017/screens/configuracion_edit_screen.dart';
+import 'package:parcial3_2506632017/screens/configuracion_screen.dart';
+import 'package:parcial3_2506632017/screens/configuraciones_screen.dart';
 
 //Pantallas
 import 'package:parcial3_2506632017/screens/home_screen.dart';
@@ -36,6 +39,9 @@ class Parcial3 extends StatelessWidget {
         'usuarios' : (BuildContext context) => UsuariosScreen(),
         'usuario_add' : (BuildContext context) => UsuarioScreen(),
         'usuario_edit' : (BuildContext context) => UsuarioEditScreen(),
+        'configuraciones' : (BuildContext context) => ConfiguracionesScreen(),
+        'configuracion_add' : (BuildContext context) => ConfiguracionScreen(),
+        'configuracion_edit' : (BuildContext context) => ConfiguracionEditScreen(),
         'mensajes' : (BuildContext context) => MensajesScreen(),
         'mensaje_add' : (BuildContext context) => MensajeScreen(),
         'mensaje_edit' : (BuildContext context) => MensajeEditScreen(),
@@ -47,4 +53,4 @@ class Parcial3 extends StatelessWidget {
   }
 }
 
-//calendarios
+//configuracion
