@@ -1,10 +1,11 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
+import 'package:parcial3_2506632017/models/mensaje_model.dart';
 import 'package:parcial3_2506632017/providers/mensajes_provider.dart';
 
-class MensajeScreen extends StatelessWidget {
-  const MensajeScreen({Key? key}) : super(key: key);
+class MensajeEditScreen extends StatelessWidget {
+  const MensajeEditScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +18,9 @@ class MensajeScreen extends StatelessWidget {
               children: [
                 SizedBox(height: 50.0,),
       
-                Text('Usuarios', style: TextStyle(color: Colors.white, fontSize: 45.0) ),
+                Text('Mensajes', style: TextStyle(color: Colors.white, fontSize: 45.0) ),
                 SizedBox( height: 30.0 ),
-                _MensajeForm(),
+                _MensajeEditForm(),
                 SizedBox( height: 30.0 ),
 
               ],
@@ -31,17 +32,17 @@ class MensajeScreen extends StatelessWidget {
   }
 }
 
-class _MensajeForm extends StatefulWidget {
+class _MensajeEditForm extends StatefulWidget {
 
   @override
-  State<_MensajeForm> createState() => _MensajeFormState();
+  State<_MensajeEditForm> createState() => _MensajeEditFormState();
 }
 
-class _MensajeFormState extends State<_MensajeForm> {
+class _MensajeEditFormState extends State<_MensajeEditForm> {
   
   final _formKey = GlobalKey<FormState>();
 
-  //Controladores
+ //Controladores
   final TextEditingController _fecha = TextEditingController();
   final TextEditingController _hora = TextEditingController();
   final TextEditingController _idgrupo = TextEditingController();
@@ -50,13 +51,48 @@ class _MensajeFormState extends State<_MensajeForm> {
   final TextEditingController _mensaje = TextEditingController();
   final TextEditingController _tags = TextEditingController();
   final TextEditingController _titulo = TextEditingController();
+  
+  MensajesProvider mensajesProvider = MensajesProvider();
+  
+  String valorDropDownNivel = 'Seleccionar nivel';
+  String valorDropDownTipo = 'Seleccionar tipo';
+
 
 
   @override
   Widget build(BuildContext context) {
 
-    MensajesProvider mensajesProvider = MensajesProvider();
+    final idMensaje = ModalRoute.of(context)!.settings.arguments;
 
+    return FutureBuilder(
+      future: mensajesProvider.getMensaje(idMensaje.toString()),
+      builder: (context, AsyncSnapshot<List<MensajeModel>> snapshot){
+
+        if(!snapshot.hasData){
+          return Center(child: CircularProgressIndicator(),);
+        }
+
+        if(snapshot.hasData){
+          var datosMensaje = snapshot.data;
+
+          _fecha.text = datosMensaje![0].fecha;
+          _hora.text = datosMensaje[0].hora;
+          _idgrupo.text = datosMensaje[0].idgrupo.toString();
+          _idu_de.text = datosMensaje[0].idu_de.toString();
+          _idu_para.text = datosMensaje[0].idu_para.toString();
+          _mensaje.text = datosMensaje[0].mensaje;
+          _tags.text = datosMensaje[0].tags;
+          _titulo.text = datosMensaje[0].titulo;
+
+          return mainContent(idMensaje.toString());
+        }
+
+        return Center(child: CircularProgressIndicator(),);
+      }
+    );
+  }
+
+  Widget mainContent(String idMensaje){
     return Card(
       margin: EdgeInsets.symmetric(horizontal: 20.0,),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
@@ -140,6 +176,8 @@ class _MensajeFormState extends State<_MensajeForm> {
             ),
 
             SizedBox( height: 30 ),
+
+            
 
             //Fecha
             Padding(
@@ -269,25 +307,26 @@ class _MensajeFormState extends State<_MensajeForm> {
               color: Colors.indigo,
               child: Container(
                 padding: EdgeInsets.symmetric( horizontal: 80, vertical: 15),
-                child: Text('Ingresar',style: TextStyle( color: Colors.white ),
+                child: Text('Actualizar',style: TextStyle( color: Colors.white ),
                 )
               ),
               onPressed: () async {
                 
                 if(_formKey.currentState!.validate()){
-                  bool r = await mensajesProvider.aggMensaje(_fecha.text, _hora.text, int.parse(_idgrupo.text), int.parse(_idu_de.text), 
+                  bool r = await mensajesProvider.actMensaje(idMensaje, _fecha.text, _hora.text, int.parse(_idgrupo.text), int.parse(_idu_de.text), 
                   int.parse(_idu_para.text), _mensaje.text, _tags.text, _titulo.text);
 
                   if(r){
-                    //Si se guardó el usuario
+                    //Si se guardó el mensaje
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Guardando mensaje'))
+                      SnackBar(content: Text('Actualizando mensaje'))
                     );
 
                     //Redirigimos a pantalla de consulta
                     Navigator.pushReplacementNamed(context, 'mensajes');
+                    
                   } else {
-                    //Si no se guardó el usuario
+                    //Si no se guardó el mensaje
                     ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text('No se pudo guardar el mensaje'))
                       );
