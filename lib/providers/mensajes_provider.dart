@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:cloud_firestore/cloud_firestore.dart' as cloud_firestore;
 import 'package:parcial3_2506632017/models/mensaje_model.dart';
 

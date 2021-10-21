@@ -2,6 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart' as firebase_core;
+import 'package:parcial3_2506632017/screens/calendario_edit_screen.dart';
+import 'package:parcial3_2506632017/screens/calendario_screen.dart';
+import 'package:parcial3_2506632017/screens/calendarios_screen.dart';
 
 //Pantallas
 import 'package:parcial3_2506632017/screens/home_screen.dart';
@@ -36,7 +39,12 @@ class Parcial3 extends StatelessWidget {
         'mensajes' : (BuildContext context) => MensajesScreen(),
         'mensaje_add' : (BuildContext context) => MensajeScreen(),
         'mensaje_edit' : (BuildContext context) => MensajeEditScreen(),
+        'calendarios' : (BuildContext context) => CalendariosScreen(),
+        'calendario_add' : (BuildContext context) => CalendarioScreen(),
+        'calendario_edit' : (BuildContext context) => CalendarioEditScreen(),
       },
     );
   }
 }
+
+//calendarios
