@@ -82,7 +82,7 @@ class _UsuarioEditFormState extends State<_UsuarioEditForm> {
           valorDropDownNivel = datosUsuario[0].nivel.toString();
           valorDropDownTipo = datosUsuario[0].tipo;
 
-          return mainContent();
+          return mainContent(idUsuario.toString());
         }
 
         return Center(child: CircularProgressIndicator(),);
@@ -90,7 +90,7 @@ class _UsuarioEditFormState extends State<_UsuarioEditForm> {
     );
   }
 
-  Widget mainContent(){
+  Widget mainContent(String idUsuario){
     return Card(
       margin: EdgeInsets.symmetric(horizontal: 20.0,),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
@@ -312,13 +312,13 @@ class _UsuarioEditFormState extends State<_UsuarioEditForm> {
               onPressed: () async {
                 
                 if(_formKey.currentState!.validate()){
-                  bool r = await usuariosProvider.aggUsuario(_avatar.text, _correo.text, _nivel, _nombre.text, _password.text, 
+                  bool r = await usuariosProvider.actUsuario(idUsuario.toString(), _avatar.text, _correo.text, _nivel, _nombre.text, _password.text, 
                   _tipo, _usuario.text);
 
                   if(r){
                     //Si se guardó el usuario
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Guardando usuario'))
+                      SnackBar(content: Text('Actualizando usuario'))
                     );
                   } else {
                     //Si no se guardó el usuario
