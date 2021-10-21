@@ -8,6 +8,9 @@ import 'package:parcial3_2506632017/screens/calendarios_screen.dart';
 import 'package:parcial3_2506632017/screens/configuracion_edit_screen.dart';
 import 'package:parcial3_2506632017/screens/configuracion_screen.dart';
 import 'package:parcial3_2506632017/screens/configuraciones_screen.dart';
+import 'package:parcial3_2506632017/screens/grupo_edit_screen.dart';
+import 'package:parcial3_2506632017/screens/grupo_screen.dart';
+import 'package:parcial3_2506632017/screens/grupos_screen.dart';
 
 //Pantallas
 import 'package:parcial3_2506632017/screens/home_screen.dart';
@@ -45,6 +48,9 @@ class Parcial3 extends StatelessWidget {
         'mensajes' : (BuildContext context) => MensajesScreen(),
         'mensaje_add' : (BuildContext context) => MensajeScreen(),
         'mensaje_edit' : (BuildContext context) => MensajeEditScreen(),
+        'grupos' : (BuildContext context) => GruposScreen(),
+        'grupo_add' : (BuildContext context) => GrupoScreen(),
+        'grupo_edit' : (BuildContext context) => GrupoEditScreen(),
         'calendarios' : (BuildContext context) => CalendariosScreen(),
         'calendario_add' : (BuildContext context) => CalendarioScreen(),
         'calendario_edit' : (BuildContext context) => CalendarioEditScreen(),
