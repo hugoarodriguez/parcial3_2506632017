@@ -289,6 +289,9 @@ class _UsuarioFormState extends State<_UsuarioForm> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text('Guardando usuario'))
                     );
+
+                    //Redirigimos a pantalla de consulta
+                    Navigator.pushReplacementNamed(context, 'usuarios');
                   } else {
                     //Si no se guardó el usuario
                     ScaffoldMessenger.of(context).showSnackBar(

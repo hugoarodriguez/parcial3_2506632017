@@ -65,7 +65,7 @@ class HomeScreen extends StatelessWidget {
           child: Text(opcion, style: TextStyle(color: Colors.black, fontSize: 18.0) ,),
         ),
         style: estiloBoton,            
-        onPressed: () => Navigator.pushNamed(context, routeName)
+        onPressed: () => Navigator.pushReplacementNamed(context, routeName)
       ),
     );
   }

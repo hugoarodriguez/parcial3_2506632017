@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart' as cloud_firestore;
 import 'package:parcial3_2506632017/models/usuario_model.dart';
 
@@ -8,7 +6,6 @@ class UsuariosProvider {
 
   //Agregar usuario
   Future<bool> aggUsuario(String avatar, String correo, int nivel, String nombre, String password, String tipo, String usuario) async {
-    bool r = false;
 
     //Referencia a la colección 'usuarios'
     cloud_firestore.CollectionReference usuarios  = _firestore.collection('usuarios');
@@ -38,8 +35,7 @@ class UsuariosProvider {
 
   //Actualizar usuario
   Future<bool> actUsuario(String idUsuario, String avatar, String correo, int nivel, String nombre, String password, String tipo, String usuario) async {
-    bool r = false;
-
+    
     //Referencia a la colección 'usuarios'
     cloud_firestore.CollectionReference usuarios  = _firestore.collection('usuarios');
 
@@ -68,7 +64,6 @@ class UsuariosProvider {
 
   //Eliminar usuario
   Future<bool> elmUsuario(String idUsuario) async {
-    bool r = false;
 
     //Referencia a la colección 'usuarios'
     cloud_firestore.CollectionReference usuarios  = _firestore.collection('usuarios');

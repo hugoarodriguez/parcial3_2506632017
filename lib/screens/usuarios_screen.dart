@@ -42,8 +42,20 @@ class _UsuariosScreenState extends State<UsuariosScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Toca rápidamente una vez para editar\n manten presionado para eliminar', style: TextStyle(fontSize: 12.0),),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: () => Navigator.pushReplacementNamed(context, 'home_screen'),
+            ),
+            Text('Toca rápidamente una vez para editar\n manten presionado para eliminar', style: TextStyle(fontSize: 12.0),),
+            SizedBox(width: 10.0,)
+          ],
+        ),
         centerTitle: true,
+        backgroundColor: Colors.deepOrange,
+        automaticallyImplyLeading: false,
       ),
       body: ListView.builder(
         itemCount: items.length,
