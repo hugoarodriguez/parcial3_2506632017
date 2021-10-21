@@ -27,7 +27,7 @@ class Parcial3 extends StatelessWidget {
       initialRoute: 'home_screen',
       routes: {
         'home_screen' : (BuildContext context) => HomeScreen(),
-        'usuario' : (BuildContext context) => UsuarioScreen(),
+        'usuario_add' : (BuildContext context) => UsuarioScreen(),
         'usuario_edit' : (BuildContext context) => UsuarioEditScreen(),
         'usuarios' : (BuildContext context) => UsuariosScreen(),
       },

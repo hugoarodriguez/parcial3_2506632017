@@ -3,9 +3,14 @@
 import 'package:flutter/material.dart';
 import 'package:parcial3_2506632017/providers/usuarios_provider.dart';
 
-class UsuariosScreen extends StatelessWidget {
+class UsuariosScreen extends StatefulWidget {
   const UsuariosScreen({Key? key}) : super(key: key);
 
+  @override
+  State<UsuariosScreen> createState() => _UsuariosScreenState();
+}
+
+class _UsuariosScreenState extends State<UsuariosScreen> {
   @override
   Widget build(BuildContext context) {
 
@@ -20,7 +25,7 @@ class UsuariosScreen extends StatelessWidget {
               if(snapshot.hasData){
                 final datos = snapshot.data;
 
-                return _crearListViewDatos(context, datos);
+                return _crearListViewDatos(context, datos, usuariosProvider);
               } else if (snapshot.hasError) {
                 return Center(child: CircularProgressIndicator());
               } else{
@@ -32,49 +37,62 @@ class UsuariosScreen extends StatelessWidget {
     );
   }
 
-  Widget _crearListViewDatos(BuildContext context, data){
+  Widget _crearListViewDatos(BuildContext context, data, UsuariosProvider usuariosProvider){
     List items = data;
 
-    return ListView.builder(
-      itemCount: items.length,
-      itemBuilder: (context, i) => Padding(
-        padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
-        child: Container(
-          padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: Colors.deepOrange.shade200,
-            borderRadius: BorderRadius.circular(10.0),
-            boxShadow: <BoxShadow>[
-              BoxShadow(
-                color: Colors.black54,
-                blurRadius: 3.0,
-                offset: Offset(0.0, 5.0)
-              )
-            ]
-          ),
-          child: TextButton(
-            child: Row(
-              children: <Widget>[
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(items[i].nombre, style: TextStyle(color: Colors.white, fontSize: 16.0, fontWeight: FontWeight.bold)),
-                    Text(items[i].correo, style: TextStyle(color: Colors.white, fontSize: 12.0, fontWeight: FontWeight.bold)),
-                  ],
-                ),
-              ],
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Toca rápidamente una vez para editar\n manten presionado para eliminar', style: TextStyle(fontSize: 12.0),),
+        centerTitle: true,
+      ),
+      body: ListView.builder(
+        itemCount: items.length,
+        itemBuilder: (context, i) => Padding(
+          padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
+          child: Container(
+            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Colors.deepOrange.shade200,
+              borderRadius: BorderRadius.circular(10.0),
+              boxShadow: <BoxShadow>[
+                BoxShadow(
+                  color: Colors.black54,
+                  blurRadius: 3.0,
+                  offset: Offset(0.0, 5.0)
+                )
+              ]
             ),
-            onPressed: (){
-
-              Navigator.pushNamed(context, 'usuario_edit', arguments: items[i].id);
-
-            },
-            onLongPress: (){
-              print('Presionado 2');
-            },
+            child: TextButton(
+              child: Row(
+                children: <Widget>[
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(items[i].nombre, style: TextStyle(color: Colors.white, fontSize: 16.0, fontWeight: FontWeight.bold)),
+                      Text(items[i].correo, style: TextStyle(color: Colors.white, fontSize: 12.0, fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+                ],
+              ),
+              onPressed: (){
+    
+                Navigator.pushNamed(context, 'usuario_edit', arguments: items[i].id);
+    
+              },
+              onLongPress: (){
+                usuariosProvider.elmUsuario(items[i].id);
+    
+                setState(() { });
+                
+              },
+            ),
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.person_add_rounded),
+        onPressed: () => Navigator.pushNamed(context, 'usuario_add'),
       ),
     );
   }

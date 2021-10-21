@@ -66,6 +66,28 @@ class UsuariosProvider {
     }
   }
 
+  //Eliminar usuario
+  Future<bool> elmUsuario(String idUsuario) async {
+    bool r = false;
+
+    //Referencia a la colección 'usuarios'
+    cloud_firestore.CollectionReference usuarios  = _firestore.collection('usuarios');
+
+    try{
+      
+      //Eliminar usuario
+      await usuarios.doc(idUsuario).delete();
+      //Si la eliminación salió bien se retorna 'true'
+      return true;
+      
+    } on cloud_firestore.FirebaseException catch(e){
+      //Si hubo error en la subida se retorna 'false'
+      print(e);
+      return false;
+
+    }
+  }
+
   //Obtener todos los usuarios
   Future<List<UsuarioModel>> getUsuarios() async {
     List<UsuarioModel> usuariosList = [];
