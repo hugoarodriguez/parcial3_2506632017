@@ -5,7 +5,7 @@ class MensajesProvider {
   final cloud_firestore.FirebaseFirestore _firestore = cloud_firestore.FirebaseFirestore.instance;
 
   //Agregar
-  Future<bool> aggMensaje(String fecha, String hora, int idGrupo, int idm, int idu_de, int idu_para, String mensaje, String tags, String titulo) async {
+  Future<bool> aggMensaje(String fecha, String hora, int idgrupo, int idu_de, int idu_para, String mensaje, String tags, String titulo) async {
 
     //Referencia a la colección 'mensaje'
     cloud_firestore.CollectionReference mensajes  = _firestore.collection('mensajes');
@@ -16,8 +16,7 @@ class MensajesProvider {
       await mensajes.add({
         'fecha' : fecha,
         'hora' : hora,
-        'idGrupo' : idGrupo,
-        'idm' : idm,
+        'idgrupo' : idgrupo,
         'idu_de' : idu_de,
         'idu_para' : idu_para,
         'mensaje' : mensaje,
@@ -36,7 +35,7 @@ class MensajesProvider {
   }
 
   //Actualiza
-  Future<bool> actMensaje(String idMensaje, String fecha, String hora, int idGrupo, int idm, int idu_de, int idu_para, String mensaje, String tags, String titulo) async {
+  Future<bool> actMensaje(String idMensaje, String fecha, String hora, int idgrupo, int idu_de, int idu_para, String mensaje, String tags, String titulo) async {
     
     //Referencia a la colección 'mensajes'
     cloud_firestore.CollectionReference mensajes  = _firestore.collection('mensajes');
@@ -47,8 +46,7 @@ class MensajesProvider {
       await mensajes.doc(idMensaje).update({
         'fecha' : fecha,
         'hora' : hora,
-        'idGrupo' : idGrupo,
-        'idm' : idm,
+        'idgrupo' : idgrupo,
         'idu_de' : idu_de,
         'idu_para' : idu_para,
         'mensaje' : mensaje,
@@ -98,7 +96,7 @@ class MensajesProvider {
     final List<cloud_firestore.DocumentSnapshot> documents = result.docs;
     
     for (var doc in documents) { 
-      mensajesList.add(MensajeModel(doc.reference.id, doc['fecha'], doc['hora'], doc['idgrupo'], doc['idm'], doc['idu_de'], doc['idu_para'], doc['mensaje'], doc['tags'], doc['titulo']));
+      mensajesList.add(MensajeModel(doc.reference.id, doc['fecha'], doc['hora'], doc['idgrupo'], doc['idu_de'], doc['idu_para'], doc['mensaje'], doc['tags'], doc['titulo']));
     }
 
     return mensajesList;
@@ -113,7 +111,7 @@ class MensajesProvider {
 
     final cloud_firestore.DocumentSnapshot doc = await mensajes.doc(idMensaje).get();
     
-    mensajesList.add(MensajeModel(doc.reference.id, doc['fecha'], doc['hora'], doc['idgrupo'], doc['idm'], doc['idu_de'], doc['idu_para'], doc['mensaje'], doc['tags'], doc['titulo']));
+    mensajesList.add(MensajeModel(doc.reference.id, doc['fecha'], doc['hora'], doc['idgrupo'], doc['idu_de'], doc['idu_para'], doc['mensaje'], doc['tags'], doc['titulo']));
 
     return mensajesList;
   }
